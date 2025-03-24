@@ -48,6 +48,15 @@
               />
             </div>
             <div class="mb-3">
+              <label for="password2" class="form-label">Senha:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password2"
+                name="password2"
+              />
+            </div>
+            <div class="mb-3">
               <input type="submit" class="btn btn-primary" value="Cadastrar" />
             </div>
           </div>
