@@ -8,7 +8,7 @@ $password2 = $_POST['password2'];
 
 if ($password === $password2) {
     //criptografar a sennha
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    $password_hash = passwordCrypt($password);
 
     $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$name', '$email', '$password_hash')";
     if (mysqli_query($conn, $sql)) {
@@ -18,4 +18,9 @@ if ($password === $password2) {
 } else {
     echo "As senhas não conferem";
     header("refresh;5;url=index.php");
+}
+
+function passwordCrypt($password)
+{
+    return password_hash($password, PASSWORD_DEFAULT);
 }
