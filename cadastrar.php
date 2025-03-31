@@ -7,7 +7,10 @@ $password = $_POST['password'];
 $password2 = $_POST['password2'];
 
 if ($password === $password2) {
-    $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$name', '$email', '$password')";
+    //criptografar a sennha
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$name', '$email', '$password_hash')";
     if (mysqli_query($conn, $sql)) {
         echo "Usuário cadastrado com sucesso";
         header("refresh;5;url=index.php");
