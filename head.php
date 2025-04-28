@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,9 +11,3 @@
     <meta name="author" content="Rafael de Sá" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-
-<?php
-include_once("./navbar.php");
-
-
-?>
