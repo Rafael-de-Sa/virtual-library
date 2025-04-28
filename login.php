@@ -1,20 +1,16 @@
 <?php
-// Iniciar ou restaurar a sessão para passar mensagens entre requisições
 session_start();
 
-// Verificar se o formulário foi enviado via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require_once("conexao.php");
 
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Validar se o formulário está completo
     if (empty($email) || empty($password)) {
         $_SESSION['message'] = "Todos os campos são obrigatórios";
         $_SESSION['message_type'] = "error";
     } else {
-        // Buscar usuário pelo email
         $sql = "SELECT * FROM usuario WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $email);
@@ -22,24 +18,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_stmt_get_result($stmt);
 
         if ($row = mysqli_fetch_assoc($result)) {
-            // Verificar se a senha está correta
             if (password_verify($password, $row['senha'])) {
-                // Login bem-sucedido
+                $_SESSION['admin'] = true;
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_name'] = $row['nome'];
                 $_SESSION['message'] = "Login realizado com sucesso!";
                 $_SESSION['message_type'] = "success";
 
                 // Redirecionar para página principal após login
-                header("Location: dashboard.php");
+                header("Location: ./adm.php");
                 exit();
             } else {
-                // Senha incorreta
                 $_SESSION['message'] = "Email ou senha incorretos";
                 $_SESSION['message_type'] = "error";
             }
         } else {
-            // Usuário não encontrado
             $_SESSION['message'] = "Email ou senha incorretos";
             $_SESSION['message_type'] = "error";
         }
@@ -47,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_close($stmt);
     }
 
-    // Se chegou aqui, significa que houve um erro no login
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
@@ -59,24 +51,13 @@ if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
     $message_type = $_SESSION['message_type'];
 
-    // Limpa as mensagens após exibi-las
     unset($_SESSION['message']);
     unset($_SESSION['message_type']);
 }
+$title = "Bibliotech - Login";
+$description = "Login de usuário";
+require_once("./head.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <meta name="description" content="Login de Usuário" />
-    <meta name="keywords" content="biblioteca, livros, login, sistema de gestão" />
-    <meta name="author" content="Rafael de Sá" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
 
 <body class="bg-gradient-to-br from-emerald-50 to-teal-100 min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-md mx-auto">

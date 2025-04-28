@@ -47,20 +47,11 @@ if (isset($_SESSION['message'])) {
   unset($_SESSION['message']);
   unset($_SESSION['message_type']);
 }
+
+$title = "Bibliotech - Cadastro de Usuário";
+$description = "Formulário de cadastro de usuário";
+require_once("./head.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro de Usuário</title>
-  <meta name="description" content="Formulário de cadastro de usuário" />
-  <meta name="keywords" content="controle, financeiro, sistema, sistema de gestão" />
-  <meta name="author" content="Rafael de Sá" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
 
 <body class="bg-gradient-to-br from-emerald-50 to-teal-100 min-h-screen flex items-center justify-center p-4">
   <div class="w-full max-w-md mx-auto">
