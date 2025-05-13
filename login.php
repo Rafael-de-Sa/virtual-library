@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row = mysqli_fetch_assoc($result)) {
             if (password_verify($password, $row['senha'])) {
                 $_SESSION['admin'] = true;
-                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['user_id'] = $row['codusuario'];
                 $_SESSION['user_name'] = $row['nome'];
                 $_SESSION['message'] = "Login realizado com sucesso!";
                 $_SESSION['message_type'] = "success";

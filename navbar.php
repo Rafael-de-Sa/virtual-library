@@ -1,3 +1,9 @@
+<?php
+// Iniciar sessão se ainda não estiver iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <nav class="bg-emerald-800 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -5,6 +11,9 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="./index.php" class="text-white font-bold text-xl">Bibliotech</a>
+                    <?php
+                    print_r($_SESSION);
+                    ?>
                 </div>
 
                 <!-- Links de navegação para desktop -->

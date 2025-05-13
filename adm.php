@@ -8,7 +8,7 @@ require_once("./head.php");
     <ul>
         <li><a href="./cadastrarusuario.php">Cadastrar Usuário</a></li>
         <li><a href="./cadastrarlivro.php">Cadastrar Livro</a></li>
-        <li><a href="">Sair</a></li>
+        <li><a href="./logout.php">Sair</a></li>
     </ul>
 
 </body>
